@@ -12,19 +12,6 @@ code {
     monospace;
 }
 
-.btn {
-  color: whitesmoke;
-  outline: none;
-  box-shadow: 4px 4px 12px -4px black;
-  border: none;
-  font-weight: bolder;
-  border-radius: 10px;
-  padding: 10px 20px 10px 20px;
-  margin: 5px;
-}
-
-.btn:focus {
-  color: salmon;
-  outline: none;
-  box-shadow: none;
+header {
+  margin: 50px 45vw;
 }
