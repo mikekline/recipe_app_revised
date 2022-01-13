@@ -1,5 +1,6 @@
 import LoginForm from './UI/molecules/forms/LoginForm.jsx';
 import RegisterForm from './UI/molecules/forms/RegisterForm';
+import LoginReg from './components/templates/LoginReg';
 
 function App() {
   return (
@@ -9,8 +10,7 @@ function App() {
       Testing Area
         
       </header>
-      <LoginForm />
-      <RegisterForm />
+      <LoginReg />
     </div>
   );
 }

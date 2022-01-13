@@ -5,6 +5,7 @@ import UsernameInput from '../../atoms/inputs/UsernameInput';
 import PasswordLabel from '../../atoms/labels/PasswordLabel';
 import PasswordInput from '../../atoms/inputs/PasswordInput';
 import RegisterButton from '../../atoms/buttons/register/RegisterButton';
+import LoginLink from '../../atoms/links/LoginLink';
 import './styles.css';
 
 
@@ -23,6 +24,7 @@ function LoginForm() {
         <PasswordInput />
       </FormGroup>
       <RegisterButton />
+      <LoginLink />
     </Form>
     </Col></Row>
   </Container> 
