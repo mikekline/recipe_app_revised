@@ -1,17 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter, Routes, Route} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './globalStyles/buttonStyles.css';
 import './index.css'
 import App from './Test';
+import LoginReg from './components/templates/LoginReg';
+import LoginForm from './UI/molecules/forms/LoginForm';
+import RegisterForm from './UI/molecules/forms/RegisterForm';
 import reportWebVitals from './reportWebVitals';
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-    <App />
-    </Router>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<LoginReg form={<LoginForm />} />} />
+        <Route path="Reg" element={<LoginReg form={<RegisterForm />} />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -9,7 +9,7 @@ import LoginLink from '../../atoms/links/LoginLink';
 import './styles.css';
 
 
-function LoginForm() {
+function RegisterForm() {
   return <Container className='test1'>
 <Row><Col>
     <RegisterHeader />
@@ -30,4 +30,4 @@ function LoginForm() {
   </Container> 
 }
 
-export default LoginForm;
+export default RegisterForm;

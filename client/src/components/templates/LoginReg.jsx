@@ -1,9 +1,13 @@
-import LoginForm from '../../UI/molecules/forms/LoginForm.jsx';
+import { useState } from "react";
+import './styles.css';
 
 
-function LoginReg() {
-  return <div>
-          <LoginForm />
+
+function LoginReg(props) {
+
+  
+  return <div className="form">
+          {props.form}
          </div>
 
 }
