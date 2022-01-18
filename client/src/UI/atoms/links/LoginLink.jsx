@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 function LoginLink() {
   return <p>Already have an acount? 
-          <Link className='' to='/'>{" "}Login</Link>
+          <Link to='/'>{" "}Login</Link>
         </p>
 }
 

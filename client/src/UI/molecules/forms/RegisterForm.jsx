@@ -9,17 +9,17 @@ import LoginLink from '../../atoms/links/LoginLink';
 import './styles.css';
 
 
-function RegisterForm() {
-  return <Container className='form'>
+function RegisterForm(props) {
+  return <Container fluid className='form'>
           <RegisterHeader />
-          <Form>
+          <Form onSubmit={props.HandleSubmit}>
             <FormGroup className="mb-3" controlId="formBasicUsername">
               <UsernameLabel />
-              <UsernameInput />
+              <UsernameInput setName={props.GetUsername} />
             </FormGroup>
             <FormGroup className="mb-3" controlId="formBasicPassword">
               <PasswordLabel />
-              <PasswordInput />
+              <PasswordInput setPassword={props.GetPassword} />
             </FormGroup>
             <RegisterButton />
             <LoginLink />

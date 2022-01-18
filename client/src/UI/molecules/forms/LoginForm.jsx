@@ -1,4 +1,5 @@
 import {Form, FormGroup, Container} from 'react-bootstrap';
+import {useState} from 'react';
 import LoginHeader from '../../atoms/headers/LoginHeader';
 import UsernameLabel from '../../atoms/labels/UsernameLabel';
 import UsernameInput from '../../atoms/inputs/UsernameInput';
@@ -9,18 +10,19 @@ import RegLink from '../../atoms/links/RegLink';
 import './styles.css';
 
 
-function LoginForm() {
-  return <Container className='form'>
+function LoginForm(props) {
+
+  return <Container fluid className='form'>
           <LoginHeader />
-          <Form>
+          <Form onSubmit={props.HandleSubmit}>
             <FormGroup className="mb-3" controlId="formBasicUsername">
               <UsernameLabel />
-              <UsernameInput />
+              <UsernameInput setName={props.GetUsername}/>
             </FormGroup>
 
             <FormGroup className="mb-3" controlId="formBasicPassword">
               <PasswordLabel />
-              <PasswordInput />
+              <PasswordInput setPassword={props.GetPassword}/>
             </FormGroup>
             <LoginButton />
           </Form>

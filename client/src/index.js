@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import reportWebVitals from './reportWebVitals';
-
+import './normalize.css';
 import Test from './Test';
 import LoginReg from './components/templates/LoginReg';
-import LoginForm from './UI/molecules/forms/LoginForm';
-import RegisterForm from './UI/molecules/forms/RegisterForm';
+import LoginFormComplete from './UI/organisms/LoginFormComplete';
+import RegisterFormComplete from './UI/organisms/RegisterFormComplete';
 
 
 
@@ -15,8 +15,8 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<LoginReg form={<LoginForm />} />} />
-        <Route path="Reg" element={<LoginReg form={<RegisterForm />} />} />
+        <Route path='/' element={<LoginReg form={<LoginFormComplete />} />} />
+        <Route path="Reg" element={<LoginReg form={<RegisterFormComplete />} />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
