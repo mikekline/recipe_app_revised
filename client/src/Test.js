@@ -2,7 +2,7 @@ import LoginForm from './UI/molecules/forms/LoginForm.jsx';
 import RegisterForm from './UI/molecules/forms/RegisterForm';
 import LoginReg from './components/templates/LoginReg';
 
-function App() {
+function Test() {
   return (
     <div className="App">
       <header className="App-header">
@@ -15,4 +15,4 @@ function App() {
   );
 }
 
-export default App;
+export default Test;

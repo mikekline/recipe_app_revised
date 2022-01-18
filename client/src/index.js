@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './globalStyles/buttonStyles.css';
-import './index.css'
-import App from './Test';
+import reportWebVitals from './reportWebVitals';
+
+import Test from './Test';
 import LoginReg from './components/templates/LoginReg';
 import LoginForm from './UI/molecules/forms/LoginForm';
 import RegisterForm from './UI/molecules/forms/RegisterForm';
-import reportWebVitals from './reportWebVitals';
+
 
 
 ReactDOM.render(

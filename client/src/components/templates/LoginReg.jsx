@@ -1,15 +1,10 @@
-import { useState } from "react";
 import './styles.css';
 
 
-
 function LoginReg(props) {
-
-  
-  return <div className="form">
+  return <div className="formTemplate">
           {props.form}
          </div>
-
 }
 
 export default LoginReg;

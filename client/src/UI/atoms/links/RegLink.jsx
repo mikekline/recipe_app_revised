@@ -1,12 +1,10 @@
-import {Link, Route, Router} from 'react-router-dom';
-
+import {Link} from 'react-router-dom';
 
 
 function RegLink() {
   return <p> Don't have an account?  
-            <Link to='/Reg'>  Signup</Link>
-          </p>
-          
+            <Link to='/Reg'>{" "}Register</Link>
+          </p>         
 }
 
 export default RegLink;

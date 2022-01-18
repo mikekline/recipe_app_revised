@@ -1,4 +1,4 @@
-import { Container, Row, Col, Form, FormGroup } from 'react-bootstrap';
+import {Form, FormGroup, Container} from 'react-bootstrap';
 import RegisterHeader from '../../atoms/headers/RegisterHeader';
 import UsernameLabel from '../../atoms/labels/UsernameLabel';
 import UsernameInput from '../../atoms/inputs/UsernameInput';
@@ -10,24 +10,21 @@ import './styles.css';
 
 
 function RegisterForm() {
-  return <Container className='test1'>
-<Row><Col>
-    <RegisterHeader />
-    <Form>
-      <FormGroup className="mb-3" controlId="formBasicUsername">
-        <UsernameLabel />
-        <UsernameInput />
-      </FormGroup>
-      
-      <FormGroup className="mb-3" controlId="formBasicPassword">
-        <PasswordLabel />
-        <PasswordInput />
-      </FormGroup>
-      <RegisterButton />
-      <LoginLink />
-    </Form>
-    </Col></Row>
-  </Container> 
+  return <Container className='form'>
+          <RegisterHeader />
+          <Form>
+            <FormGroup className="mb-3" controlId="formBasicUsername">
+              <UsernameLabel />
+              <UsernameInput />
+            </FormGroup>
+            <FormGroup className="mb-3" controlId="formBasicPassword">
+              <PasswordLabel />
+              <PasswordInput />
+            </FormGroup>
+            <RegisterButton />
+            <LoginLink />
+          </Form>
+        </Container> 
 }
 
 export default RegisterForm;
