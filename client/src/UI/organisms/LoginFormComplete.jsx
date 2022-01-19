@@ -1,7 +1,9 @@
 
 import {useState} from 'react';
 import LoginForm from '../molecules/forms/LoginForm';
-
+import axios from 'axios';
+require('dotenv').config();
+const loginUrl = process.env.REACT_APP_LOGINURL; 
 
 function LoginFormComplete() {
   const [username, setusername] = useState('');
@@ -21,8 +23,19 @@ function LoginFormComplete() {
 
    function HandleSubmit(e){
     e.preventDefault();
-    console.log(username);
-    console.log(password);
+    
+    const loginData = {
+      username: username,
+      password: password
+    }
+
+    axios.post(loginUrl, loginData)
+      .then(response => {
+        console.log(response.status);
+        console.log(response.loginData);
+      }).catch(error => {
+        console.error('Can not find login data!', error);
+      });
   };
 
   return <LoginForm 

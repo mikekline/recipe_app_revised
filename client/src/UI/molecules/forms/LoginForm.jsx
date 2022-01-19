@@ -1,5 +1,4 @@
 import {Form, FormGroup, Container} from 'react-bootstrap';
-import {useState} from 'react';
 import LoginHeader from '../../atoms/headers/LoginHeader';
 import UsernameLabel from '../../atoms/labels/UsernameLabel';
 import UsernameInput from '../../atoms/inputs/UsernameInput';

@@ -1,7 +1,9 @@
 
 import {useState} from 'react';
 import RegisterForm from '../molecules/forms/RegisterForm';
-
+import axios from 'axios';
+require('dotenv').config();
+const registerUrl = process.env.REACT_APP_REGISTERURL; 
 
 function LoginFormComplete() {
   const [username, setusername] = useState('');
@@ -21,8 +23,19 @@ function LoginFormComplete() {
 
    function HandleSubmit(e){
     e.preventDefault();
-    console.log(username);
-    console.log(password);
+    
+    const registerData = {
+      username: username,
+      password: password
+    }
+
+    axios.post(registerUrl, registerData)
+      .then(response => {
+        console.log("Status: ", response.status);
+        console.log("Data: ", response.registerData);
+      }).catch(error => {
+        console.error('Did not save data!', error);
+      });
   };
 
   return <RegisterForm
