@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const router = express.Router();
 const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
@@ -14,20 +15,24 @@ app.use(express.json());
 
 
 
-//conecting to the database, using db/index.js
-const db = require('./db');
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+createAccount = (req, res) => {
+    const body = req.body
+    res.send(body)
+    console.log(body)
+    
+}
+
 
 
 
 //mounts path for login/register endpoints
-const accountRouter = require('./routes/account_router');
-app.use('/', accountRouter); 
+const accountRouter = router.post('/login', createAccount);
+app.use('/test', accountRouter); 
 
 
 //mounts path for recipes endpoints
-const recipeRouter = require('./routes/recipe_router');
-app.use('/recipe_app', recipeRouter); 
+// const recipeRouter = require('./routes/recipe_router');
+// app.use('/recipe_app', recipeRouter); 
 
 
 

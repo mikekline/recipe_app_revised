@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Routes, Route} from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import reportWebVitals from './reportWebVitals';
 import './normalize.css';
@@ -14,9 +14,10 @@ import RegisterFormComplete from './UI/organisms/RegisterFormComplete';
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Routes>
+    {/* <Navigate path='/' to='/login' replace={true} /> */}
+      <Routes>     
         <Route path='/' element={<LoginReg form={<LoginFormComplete />} />} />
-        <Route path="Reg" element={<LoginReg form={<RegisterFormComplete />} />} />
+        <Route path="/Reg" element={<LoginReg form={<RegisterFormComplete />} />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

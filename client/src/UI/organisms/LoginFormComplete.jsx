@@ -21,6 +21,8 @@ function LoginFormComplete() {
    
   };
 
+
+
    const HandleSubmit = (e) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -29,22 +31,24 @@ function LoginFormComplete() {
       password: password
     }
 
-
     if (form.checkValidity() === false) {
       e.stopPropagation();
     }
       setValidated(true);
 
 
-    axios.post(loginUrl, loginData)
+    axios.get(loginUrl, loginData)
       .then(response => {
         console.log(response.status);
-        console.log(response.loginData);
+        console.log(response.data);
       }).catch(error => {
         console.error('Can not find login data!', error);
       });
   };
 
+
+
+  
   return <LoginForm
             PropValidated={validated} 
             GetUsername={GetUsername} 

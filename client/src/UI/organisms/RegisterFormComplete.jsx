@@ -21,6 +21,8 @@ function LoginFormComplete() {
    
   };
 
+
+
    function HandleSubmit(e){
     e.preventDefault();
     const form = e.currentTarget;
@@ -28,8 +30,7 @@ function LoginFormComplete() {
       username: username,
       password: password
     }
-
-
+    
     if (form.checkValidity() === false) {
       e.stopPropagation();
     }
@@ -39,11 +40,13 @@ function LoginFormComplete() {
     axios.post(registerUrl, registerData)
       .then(response => {
         console.log("Status: ", response.status);
-        console.log("Data: ", response.registerData);
+        console.log("Data: ", response.data);
       }).catch(error => {
         console.error('Did not save data!', error);
       });
   };
+
+  
 
   return <RegisterForm
             PropValidated={validated} 
