@@ -1,4 +1,3 @@
-
 import {useState} from 'react';
 import RegisterForm from '../molecules/forms/RegisterForm';
 import axios from 'axios';
@@ -8,11 +7,12 @@ const registerUrl = process.env.REACT_APP_REGISTERURL;
 function LoginFormComplete() {
   const [username, setusername] = useState('');
   const [password, setPassword] = useState('');
+  const [validated, setValidated] = useState(false);
 
   
 
   function GetUsername(e){    
-     setusername(e.target.value);
+    setusername(e.target.value);
     
    };
 
@@ -23,11 +23,18 @@ function LoginFormComplete() {
 
    function HandleSubmit(e){
     e.preventDefault();
-    
+    const form = e.currentTarget;
     const registerData = {
       username: username,
       password: password
     }
+
+
+    if (form.checkValidity() === false) {
+      e.stopPropagation();
+    }
+      setValidated(true);
+
 
     axios.post(registerUrl, registerData)
       .then(response => {
@@ -39,6 +46,7 @@ function LoginFormComplete() {
   };
 
   return <RegisterForm
+            PropValidated={validated} 
             GetUsername={GetUsername} 
             GetPassword={GetPassword} 
             HandleSubmit={HandleSubmit}

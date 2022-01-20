@@ -12,7 +12,7 @@ import './styles.css';
 function RegisterForm(props) {
   return <Container fluid className='form'>
           <RegisterHeader />
-          <Form onSubmit={props.HandleSubmit}>
+          <Form noValidate validated={props.PropValidated} onSubmit={props.HandleSubmit}>
             <FormGroup className="mb-3" controlId="formBasicUsername">
               <UsernameLabel />
               <UsernameInput setName={props.GetUsername} />

@@ -10,15 +10,13 @@ import './styles.css';
 
 
 function LoginForm(props) {
-
   return <Container fluid className='form'>
           <LoginHeader />
-          <Form onSubmit={props.HandleSubmit}>
+          <Form noValidate validated={props.PropValidated} onSubmit={props.HandleSubmit}>
             <FormGroup className="mb-3" controlId="formBasicUsername">
               <UsernameLabel />
               <UsernameInput setName={props.GetUsername}/>
             </FormGroup>
-
             <FormGroup className="mb-3" controlId="formBasicPassword">
               <PasswordLabel />
               <PasswordInput setPassword={props.GetPassword}/>
