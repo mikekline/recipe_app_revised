@@ -8,7 +8,7 @@ createRecipe = (req, res) => {
     if (!body) {
         return res.status(400).json({
             success: false,
-            error: 'Please add a recipe',
+            error: 'Please add a recipe'
         })
     }
     
@@ -24,13 +24,13 @@ createRecipe = (req, res) => {
         .then(() => {
             return res.status(201).json({
                 success: true,
-                message: 'recipe added!',
+                message: 'recipe added!'
             })
         })
         .catch(error => {
             return res.status(400).json({
                 error,
-                message: 'recipe not added!',
+                message: 'recipe not added!'
             })
         })
 
@@ -52,12 +52,12 @@ getRecipes = async (req, res) => {
                 success: false, 
                 error: `No recipes to be found` 
             })
-        }
+        } 
         return res.status(200).json({ 
             success: true, 
-            data: recipes 
+            data: recipes
         })
-    }).catch(err => console.log(err))
+    }).clone().catch(err => console.log(err))
 };
 
 module.exports = {createRecipe, getRecipes};

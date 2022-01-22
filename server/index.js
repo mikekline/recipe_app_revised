@@ -14,7 +14,7 @@ app.use(express.json());
 
 
 
-//conecting to the database, using db/index.js
+//conecting to the database, uses db/index.js
 const db = require('./db');
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 

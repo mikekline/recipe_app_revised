@@ -1,6 +1,7 @@
 const Account = require('../models/account');
 
 
+
 createAccount = (req, res) => {
   const body = req.body
   const account = new Account(body)
@@ -8,11 +9,11 @@ createAccount = (req, res) => {
   if (!body) {
       return res.status(400).json({
           success: false,
-          error: 'Please sign up',
+          error: 'Please sign up'
       })
   }
   
-  if (!Account) {
+  if (!account) {
       return res.status(400).json({ 
           success: false, 
           error: err 
@@ -20,26 +21,24 @@ createAccount = (req, res) => {
   }
 
   console.log(account)
+  
 
-  // account
-  //     .save()
-  //     .then(() => {
-  //         return res.status(201).json({
-  //             success: true,
-  //             message: 'Account added!',
-  //         })
-  //     })
-  //     .catch(error => {
-  //         return res.status(400).json({
-  //             error,
-  //             message: 'Acount not added!',
-  //         })
-  //     })
+  account
+      .save()
+      .then(() => {
+          return res.status(201).json({
+              success: true,
+              message: 'Account added!'
+          })
+      })
+      .catch(error => {
+          return res.status(400).json({
+              error,
+              message: 'Acount not added!'
+          })
+      })
 
 };
-
-
-
 
 
 
@@ -62,5 +61,7 @@ retrieveAccount = async (req, res) => {
           success: true, 
           data: users 
       })
-  }).catch(err => console.log(err))
+  }).clone().catch(err => console.log(err))
 };
+
+module.exports = {createAccount, retrieveAccount};
