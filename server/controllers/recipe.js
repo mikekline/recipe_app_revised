@@ -15,7 +15,7 @@ createRecipe = (req, res) => {
     if (!recipe) {
         return res.status(400).json({ 
             success: false, 
-            error: err 
+            error: error 
         })
     }
 
@@ -44,7 +44,7 @@ getRecipes = async (req, res) => {
         if (err) {
             return res.status(400).json({ 
                 success: false, 
-                error: err 
+                error: error 
             })
         }
         if (!recipes.length) {

@@ -16,11 +16,11 @@ createAccount = (req, res) => {
   if (!account) {
       return res.status(400).json({ 
           success: false, 
-          error: err 
+          error: error 
       })
   }
 
-  console.log(account)
+  
   
 
   account
@@ -28,7 +28,7 @@ createAccount = (req, res) => {
       .then(() => {
           return res.status(201).json({
               success: true,
-              message: 'Account added!'
+              message: 'Account added! Please Login!'
           })
       })
       .catch(error => {
@@ -37,7 +37,8 @@ createAccount = (req, res) => {
               message: 'Acount not added!'
           })
       })
-
+  
+    
 };
 
 
@@ -48,7 +49,7 @@ retrieveAccount = async (req, res) => {
       if (err) {
           return res.status(400).json({ 
               success: false, 
-              error: err 
+              error: error 
           })
       }
       if (!users.length) {
