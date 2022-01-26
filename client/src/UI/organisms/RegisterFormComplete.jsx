@@ -4,7 +4,7 @@ import axios from 'axios';
 require('dotenv').config();
 const registerUrl = process.env.REACT_APP_REGISTERURL; 
 
-function LoginFormComplete() {
+function LoginFormComplete(props) {
   const [username, setusername] = useState('');
   const [password, setPassword] = useState('');
   const [validated, setValidated] = useState(false);
@@ -13,12 +13,10 @@ function LoginFormComplete() {
 
   function GetUsername(e){    
     setusername(e.target.value);
-    
    };
 
    function GetPassword(e){    
     setPassword(e.target.value);
-   
   };
 
 
