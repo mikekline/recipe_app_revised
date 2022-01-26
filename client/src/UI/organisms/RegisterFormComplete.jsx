@@ -38,7 +38,6 @@ function LoginFormComplete(props) {
     axios.post(registerUrl, registerData)
       .then(response => {
         console.log("Status: ", response.status);
-        console.log("Data: ", response.data);
       }).catch(error => {
         console.error('Did not save data!', error);
       });

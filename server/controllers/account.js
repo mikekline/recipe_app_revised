@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const Account = require('../models/account');
 
 
@@ -44,25 +45,55 @@ createAccount = (req, res) => {
 
 
 
-retrieveAccount = async (req, res) => {
-  await Account.find({}, (err, users) => {
-      if (err) {
-          return res.status(400).json({ 
-              success: false, 
-              error: error 
-          })
-      }
-      if (!users.length) {
-          return res.status(404).json({ 
-              success: false, 
-              error: `No Account found` 
-          })
-      }
-      return res.status(200).json({ 
-          success: true, 
-          data: users 
-      })
-  }).clone().catch(err => console.log(err))
+retrieveAccount = (req, res) => {
+    let username = req.body.username;
+    let password = req.body.password;
+
+    Account
+        .findOne({username: username})
+        .then(async account => {
+            if (account) {
+                await bcrypt.compare(password, account.password, function(err, result) {
+                    if (result){
+                        return res.status(200).json({ 
+                            success: true, 
+                            message: 'Login Success' 
+                        })
+                    } else {
+                        console.log('incorect');
+                    }
+
+                });
+                console.log('test');
+            } else {
+                console.log('nope');
+            }
+
+            
+
+        }).catch(err => console.log(err))
+ 
 };
 
 module.exports = {createAccount, retrieveAccount};
+
+
+
+// await Account.find({}, (err, accounts) => {
+    //       if (err) {
+    //           return res.status(400).json({ 
+    //               success: false, 
+    //               error: error 
+    //           })
+    //       }
+    //       if (!accounts.length) {
+    //           return res.status(404).json({ 
+    //               success: false, 
+    //               error: `Account not found` 
+    //           })
+    //       }
+    //       return res.status(200).json({ 
+    //           success: true, 
+    //           data: accounts 
+    //       })
+    //   }).clone().catch(err => console.log(err))
