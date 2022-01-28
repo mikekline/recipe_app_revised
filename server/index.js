@@ -1,16 +1,27 @@
 const express = require('express');
 const app = express();
+const session = require('express-session');
 const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
 const Port = process.env.PORT;
-
+const sessionSecret = process.env.SECRET;
 
 app.use(cors());
 app.use(express.urlencoded({
     extended: true
 }));
 app.use(express.json());
+
+
+//express session
+app.set('trust proxy', 1); // trust first proxy
+app.use(session({
+  secret: sessionSecret,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}));
 
 
 
