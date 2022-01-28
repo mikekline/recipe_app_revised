@@ -1,4 +1,5 @@
-import {useState} from 'react';
+import Cookies from 'js-cookie'
+import {useState, useEffect} from 'react';
 import LoginForm from '../molecules/forms/LoginForm';
 import axios from 'axios';
 require('dotenv').config();
@@ -21,7 +22,10 @@ function LoginFormComplete() {
    
   };
 
-
+  useEffect(() => {
+   console.log(document.cookie)
+  });
+  
 
    const HandleSubmit = (e) => {
     e.preventDefault();
@@ -36,8 +40,8 @@ function LoginFormComplete() {
     }
       setValidated(true);
 
-
-    axios.get(loginUrl, loginData)
+      
+    axios.post(loginUrl, loginData)
       .then(response => {
         console.log(response.status);
         console.log(response.data);
@@ -47,6 +51,7 @@ function LoginFormComplete() {
   };
 
 
+  
 
   
   return <LoginForm

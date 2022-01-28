@@ -14,13 +14,27 @@ app.use(express.urlencoded({
 app.use(express.json());
 
 
+app.use(function(req, res, next) {  
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});  
+
+
+
+
+
 //express session
 app.set('trust proxy', 1); // trust first proxy
 app.use(session({
   secret: sessionSecret,
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true }
+  cookie: { 
+      secure: false, //cahnge in deployment check documentation
+      httpOnly: false,
+      
+  }
 }));
 
 

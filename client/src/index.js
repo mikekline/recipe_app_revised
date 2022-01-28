@@ -14,7 +14,7 @@ import RegisterFormComplete from './UI/organisms/RegisterFormComplete';
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-    <useNavigate path='/' to='/login' replace={true} />
+    {/* <useNavigate path='/' to='/login' replace={true} /> */}
       <Routes>     
         <Route path='/' element={<LoginReg form={<LoginFormComplete />} />} />
         <Route path="/Reg" element={<LoginReg form={<RegisterFormComplete />} />} />
