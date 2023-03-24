@@ -1,14 +1,20 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const recipe = require('../controllers/recipe');
-require('dotenv').config();
-const postRecipe = process.env.POSTRECIPE;
-const getRecipes = process.env.GETRECIPE;
+const recipe = require("../controllers/recipe");
 
-//used as endpoint conect to form post 
-router.post(postRecipe, recipe.createRecipe);
+//Create a new recipe
+router.post("/add_recipe", recipe.createRecipe);
 
-//used as endpoint on displaying a list of recipes from server
-router.get(getRecipes, recipe.getRecipes);
+//Retrieve all recipes from Database
+router.get("/recipes", recipe.getRecipes);
+
+//Retrieve a specific recipe
+router.get("/:id/recipe/", recipe.getRecipe);
+
+//Updates a specific recipe
+router.put("/:id/update_recipe", recipe.updateRecipe);
+
+//deletes a specific recipe
+router.delete("/:id/delete_recipe", recipe.deleteRecipe);
 
 module.exports = router;

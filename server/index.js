@@ -1,74 +1,44 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const session = require('express-session');
-const cors = require('cors');
-const path = require('path');
-require('dotenv').config();
-const Port = process.env.PORT;
-const sessionSecret = process.env.SECRET;
+const cors = require("cors");
+const path = require("path");
+const accountRouter = require("./routes/account_router");
+const recipeRouter = require("./routes/recipe_router");
+const Port = process.env.PORT || 3000;
+require("dotenv").config();
 
 app.use(cors());
-app.use(express.urlencoded({
-    extended: true
-}));
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
 app.use(express.json());
 
+//conecting to database
+const db = require("./db");
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
-app.use(function(req, res, next) {  
-    res.header('Access-Control-Allow-Origin', req.headers.origin);
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});  
+/**************Endpoints******************/
 
+//end point for login/register
+app.use("/user", accountRouter);
 
+//end point for recipes
+app.use("/recipe_app", recipeRouter);
 
+//Testing sever is runing
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
 
-
-//express session
-app.set('trust proxy', 1); // trust first proxy
-app.use(session({
-  secret: sessionSecret,
-  resave: false,
-  saveUninitialized: true,
-  cookie: { 
-      secure: false, //cahnge in deployment check documentation
-      httpOnly: false,
-      
-  }
-}));
-
-
-
-//conecting to the database, uses db/index.js
-const db = require('./db');
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-
-
-//mounts path for login/register endpoints
-const accountRouter = require('./routes/account_router');
-app.use('/', accountRouter); 
-
-
-//mounts path for recipes endpoints
-const recipeRouter = require('./routes/recipe_router');
-app.use('/recipe_app', recipeRouter); 
-
-
-
-/* getting from server and displaying /test end point */ 
-app.get('/test', (req, res) => {
-    res.send('Hello World!')
-})
-
-
+/*****************************************/
 
 //servers React files
 // app.use(express.static(path.join('/var/www/html/A_Cooks_Tale/public', 'build')));
 // app.get('/*', function (req, res) {
 //     res.sendFile(path.join('/var/www/html/A_Cooks_Tale/public', 'build', 'index.html'));
 // });
-
 
 //servers React files for development
 // app.use(express.static(path.join('public', 'build')));
@@ -77,5 +47,5 @@ app.get('/test', (req, res) => {
 // });
 
 app.listen(Port, () => {
-    console.log(`Server running on port: ${Port}`);
+  console.log(`Server running on port: ${Port}`);
 });

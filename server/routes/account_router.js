@@ -1,15 +1,11 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const account = require('../controllers/account');
-require('dotenv').config();
-const postLogin = process.env.LOGIN;
-const postRegister = process.env.REGISTER;
+const account = require("../controllers/account");
 
+//Endpoint for login form
+router.post("/login", account.retrieveAccount);
 
-//used as endpoint to serve login form
-router.post(postLogin, account.retrieveAccount);
-
-//used as endpoint to serve registration form
-router.post(postRegister, account.createAccount);
+//Endpoint for registration form
+router.post("/register", account.createAccount);
 
 module.exports = router;

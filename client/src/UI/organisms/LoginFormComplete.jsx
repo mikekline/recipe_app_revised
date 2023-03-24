@@ -4,7 +4,7 @@ import LoginForm from '../molecules/forms/LoginForm';
 import axios from 'axios';
 require('dotenv').config();
 const loginUrl = process.env.REACT_APP_LOGINURL; 
-
+console.log(loginUrl)
 function LoginFormComplete() {
   const [username, setusername] = useState('');
   const [password, setPassword] = useState('');

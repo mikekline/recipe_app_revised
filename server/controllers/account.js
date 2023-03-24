@@ -72,7 +72,7 @@ retrieveAccount = (req, res) => {
             } else {
                 return res.status(400).json({ 
                     success: false, 
-                    message: 'Cound not find acciunt' 
+                    message: 'Cound not find account' 
                 })
             }   
 
