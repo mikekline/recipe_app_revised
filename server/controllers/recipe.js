@@ -74,4 +74,10 @@ deleteRecipe = async (req, res) => {
   }
 };
 
-module.exports = { createRecipe, getRecipes };
+module.exports = {
+  createRecipe,
+  getRecipes,
+  getRecipe,
+  updateRecipe,
+  deleteRecipe,
+};
