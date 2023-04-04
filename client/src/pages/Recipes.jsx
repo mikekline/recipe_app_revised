@@ -3,8 +3,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 
 const Recipes = () => {
-  let [allRecipes, setAllRecipes] = useState([]);
-  let [loading, setLoading] = useState(true);
+  const [allRecipes, setAllRecipes] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
@@ -31,10 +31,10 @@ const Recipes = () => {
       {allRecipes &&
         allRecipes.map((recipe) => {
           return (
-            <div key={recipe.id}>
+            <div key={recipe._id}>
               <h2>{recipe.title}</h2>
               <p>{recipe.ingredients}</p>
-              <p> {recipe.directions}</p>
+              <p>{recipe.directions}</p>
             </div>
           );
         })}
