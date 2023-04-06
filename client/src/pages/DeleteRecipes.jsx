@@ -38,11 +38,11 @@ const DeleteRecipes = () => {
   return (
     <section>
       <h2>Remove Recipes</h2>
-      {allRecipes &&
-        allRecipes.map((recipe) => {
-          return (
-            <div key={recipe._id}>
-              <p>
+      <div className='removeR'>
+        {allRecipes &&
+          allRecipes.map((recipe) => {
+            return (
+              <p className='deleteRecipeTitle' key={recipe._id}>
                 {recipe.title}
                 <button
                   className='deleteBtn'
@@ -51,9 +51,9 @@ const DeleteRecipes = () => {
                   Delete
                 </button>
               </p>
-            </div>
-          );
-        })}
+            );
+          })}
+      </div>
     </section>
   );
 };
