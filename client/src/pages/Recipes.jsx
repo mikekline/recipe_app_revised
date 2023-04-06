@@ -35,10 +35,19 @@ const Recipes = () => {
             <div key={recipe._id}>
               <h3>{recipe.title}</h3>
               <p>
-                {recipe.ingredients.map((ingredient) => {
-                  <p>{ingredient}</p>;
-                })}
+                {recipe.ingredients &&
+                  recipe.ingredients.map((ingredient) => {
+                    return (
+                      <p key={ingredient._id}>
+                        {ingredient.amount}
+                        {ingredient.unit}
+                        {ingredient.amount && " - "}
+                        {ingredient.ingredient}
+                      </p>
+                    );
+                  })}
               </p>
+              <h4>Directions</h4>
               <p>{recipe.directions}</p>
             </div>
           );
