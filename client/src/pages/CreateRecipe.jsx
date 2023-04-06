@@ -1,10 +1,17 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 const CreateRecipe = () => {
   const [ingredients, setIngredients] = useState([
     { amount: "", unit: "", ingredient: "" },
   ]);
+
+  // const defaultValues = {
+  //   title: "",
+  //   ingredients: ingredients,
+  //   directions: "",
+  // };
 
   const {
     register,
@@ -23,16 +30,17 @@ const CreateRecipe = () => {
     };
 
     console.log(newRecipe);
-    //!!todo get reset to reset ingredients to blank
-    // axios
-    //   .post("http://localhost:3000/recipe_app//add_recipe", newRecipe)
-    //   .then((res) => {
-    //     console.log(res)
-    //     reset()
-    //   })
-    //   .catch((error) => {
-    //     console.log(`Error: ${error}`);
-    //   });
+
+    axios
+      .post("http://localhost:3000/recipe_app//add_recipe", newRecipe)
+      .then((res) => {
+        console.log(res);
+        reset();
+        setIngredients([{ amount: "", unit: "", ingredient: "" }]);
+      })
+      .catch((error) => {
+        console.log(`Error: ${error}`);
+      });
   };
 
   const handleIngredientChange = (index, field, value) => {
@@ -70,7 +78,10 @@ const CreateRecipe = () => {
   return (
     <section>
       <h2>Add a recipe</h2>
-      <form onSubmit={(e) => handleSubmit(onSubmit)(e)}>
+      <form
+        className='createRecipeForm'
+        onSubmit={(e) => handleSubmit(onSubmit)(e)}
+      >
         <div>
           <label>Title: </label>
           <input
@@ -142,7 +153,9 @@ const CreateRecipe = () => {
           <label>Directions: </label>
           <input name='directions' type='text' {...register("directions")} />
         </div>
-        <button type='submit'>Submit</button>
+        <button className='btn' type='submit'>
+          Submit
+        </button>
       </form>
     </section>
   );

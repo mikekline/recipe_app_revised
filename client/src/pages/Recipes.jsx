@@ -28,12 +28,21 @@ const Recipes = () => {
 
   return (
     <section>
+      <h2>Recipes</h2>
       {allRecipes &&
         allRecipes.map((recipe) => {
           return (
             <div key={recipe._id}>
-              <h2>{recipe.title}</h2>
-              <p>{recipe.ingredients}</p>
+              <h3>{recipe.title}</h3>
+              <p>
+                {recipe.ingredients &&
+                  recipe.ingredients.map((ingredient) => {
+                    <div>
+                      {ingredient.amount}
+                      {ingredient.unit} - {ingredient.ingredient}
+                    </div>;
+                  })}
+              </p>
               <p>{recipe.directions}</p>
             </div>
           );
