@@ -47,8 +47,8 @@ const Recipes = () => {
                     );
                   })}
               </p>
-              <h4>Directions</h4>
-              <p>{recipe.directions}</p>
+              {recipe.directions && <h4>Directions</h4>}
+              <p>{recipe.directions && recipe.directions}</p>
             </div>
           );
         })}

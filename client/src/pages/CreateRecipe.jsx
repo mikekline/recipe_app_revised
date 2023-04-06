@@ -131,6 +131,7 @@ const CreateRecipe = () => {
             />
 
             <button
+              className='plusMinusBtn'
               type='button'
               onClick={() => {
                 addIngredient(index);
@@ -139,6 +140,7 @@ const CreateRecipe = () => {
               +
             </button>
             <button
+              className='plusMinusBtn'
               type='button'
               onClick={() => {
                 removeIngredient(index);
