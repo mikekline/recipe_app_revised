@@ -139,21 +139,28 @@ const CreateRecipe = () => {
             >
               +
             </button>
-            <button
-              className='plusMinusBtn'
-              type='button'
-              onClick={() => {
-                removeIngredient(index);
-              }}
-            >
-              -
-            </button>
+            {index > 0 && (
+              <button
+                className='plusMinusBtn'
+                type='button'
+                onClick={() => {
+                  removeIngredient(index);
+                }}
+              >
+                -
+              </button>
+            )}
           </span>
         ))}
 
         <div>
           <label>Directions: </label>
-          <input name='directions' type='text' {...register("directions")} />
+          <textarea
+            className='directions'
+            name='directions'
+            type='text'
+            {...register("directions")}
+          />
         </div>
         <button className='btn' type='submit'>
           Submit

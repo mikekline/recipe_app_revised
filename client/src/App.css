@@ -45,3 +45,9 @@ small {
   padding-bottom: 2px;
   padding-top: 2px;
 }
+
+.directions {
+  height: 8rem;
+  margin-bottom: 1rem;
+  width: 22rem;
+}
