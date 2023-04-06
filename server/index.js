@@ -36,7 +36,7 @@ app.use("/user", accountRouter);
 //end point for recipes
 app.use("/recipe_app", recipeRouter);
 
-//Testing sever is runing
+//Testing sever is running
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });

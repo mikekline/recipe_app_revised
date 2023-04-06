@@ -1,11 +1,12 @@
 import "./App.css";
-import { CreateRecipe, Recipes } from "./pages";
+import { CreateRecipe, DeleteRecipes, Recipes } from "./pages";
 
 function App() {
   return (
     <>
       <CreateRecipe />
       <Recipes />
+      <DeleteRecipes />
     </>
   );
 }

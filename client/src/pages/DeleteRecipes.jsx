@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 
-const Recipes = () => {
+const DeleteRecipes = () => {
   const [allRecipes, setAllRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -26,20 +26,31 @@ const Recipes = () => {
     );
   }
 
+  const handleDelete = (id) => {
+    axios
+      .delete(`http://localhost:3000/recipe_app/delete_recipe/${id}`)
+      .then((res) => {
+        console.log(res);
+        setAllRecipes(allRecipes.filter((recipe) => recipe._id !== id));
+      });
+  };
+
   return (
     <section>
-      <h2>Recipes</h2>
+      <h2>Remove Recipes</h2>
       {allRecipes &&
         allRecipes.map((recipe) => {
           return (
             <div key={recipe._id}>
-              <h3>{recipe.title}</h3>
               <p>
-                {recipe.ingredients.map((ingredient) => {
-                  <p>{ingredient}</p>;
-                })}
+                {recipe.title}
+                <button
+                  className='deleteBtn'
+                  onClick={() => handleDelete(recipe._id)}
+                >
+                  Delete
+                </button>
               </p>
-              <p>{recipe.directions}</p>
             </div>
           );
         })}
@@ -47,4 +58,4 @@ const Recipes = () => {
   );
 };
 
-export default Recipes;
+export default DeleteRecipes;

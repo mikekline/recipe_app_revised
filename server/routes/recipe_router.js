@@ -9,12 +9,12 @@ router.post("/add_recipe", recipe.createRecipe);
 router.get("/recipes", recipe.getRecipes);
 
 //Retrieve a specific recipe
-router.get("/:id/recipe/", recipe.getRecipe);
+router.get("/recipe/:id", recipe.getRecipe);
 
 //Updates a specific recipe
-router.put("/:id/update_recipe", recipe.updateRecipe);
+router.put("/update_recipe/:id", recipe.updateRecipe);
 
 //deletes a specific recipe
-router.delete("/:id/delete_recipe", recipe.deleteRecipe);
+router.delete("/delete_recipe/:id", recipe.deleteRecipe);
 
 module.exports = router;

@@ -17,6 +17,13 @@ input {
   width: 10rem;
 }
 
+.deleteBtn {
+  color: red;
+  margin-left: 1rem;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
 small {
   color: red;
   display: block;
