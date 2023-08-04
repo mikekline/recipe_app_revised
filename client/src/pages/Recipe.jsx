@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation } from 'react-router-dom';
 import CircularProgress from "@mui/material/CircularProgress";
 
-const Recipe = (props) => {
+const Recipe = () => {
   let { state } = useLocation();
   let recipe = state.recipe
 
@@ -12,7 +12,7 @@ const Recipe = (props) => {
       <h1>
         {recipe.title}
       </h1>
-      <Link to='/'>
+      <Link to={`/editRecipe/${recipe._id}`} state={{recipe}}>
         <button className='btn editBtn' type='button'>
           edit
         </button>

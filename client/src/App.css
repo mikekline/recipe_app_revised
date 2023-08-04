@@ -6,7 +6,7 @@
 .navbar {
   display: flex;
   gap:1rem;
-  margin: 0 auto;
+  margin: .5rem auto;
   width:90vw
 }
 
@@ -48,6 +48,11 @@ input {
   margin-bottom: 1.7rem;
   padding: 1px;
   width: 4rem;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: space-between;
 }
 
 .deleteBtn {

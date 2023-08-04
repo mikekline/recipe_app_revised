@@ -8,13 +8,13 @@ const Navbar = () => {
           to='/' 
           className={({isActive})=>isActive?'link active': 'link'} 
         >
-          Home
+          Recipes
         </NavLink>
         <NavLink 
           to='/addRecipe' 
           className={({isActive})=>isActive?'link active': 'link'}
         >
-          Add Recipes
+          Add a Recipe
         </NavLink>
         <NavLink 
           to='/deleteRecipe' 

@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Navbar, CreateRecipe, DeleteRecipes, Recipes, Recipe, Error } from "./pages";
+import { Navbar, CreateRecipe, EditRecipe, DeleteRecipes, Recipes, Recipe, Error } from "./pages";
 
 
 function App() {
@@ -10,6 +10,7 @@ function App() {
         <Route path='/' element={<Navbar />}>
           <Route index element={<Recipes />} /> 
           <Route path='recipe/:recipeId' element={<Recipe />} />
+          <Route path='editRecipe/:recipeId' element={<EditRecipe />} />
           <Route path='addRecipe' element={<CreateRecipe />} />
           <Route path='deleteRecipe' element={<DeleteRecipes />} />
         </Route>
