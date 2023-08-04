@@ -37,12 +37,12 @@ const DeleteRecipes = () => {
 
   return (
     <section>
-      <h2>Remove Recipes</h2>
-      <div className='removeR'>
+      <h1>Remove Recipes</h1>
+      <div className=''>
         {allRecipes &&
           allRecipes.map((recipe) => {
             return (
-              <p className='deleteRecipeTitle' key={recipe._id}>
+              <p className='RecipeTitle' key={recipe._id}>
                 {recipe.title}
                 <button
                   className='deleteBtn'

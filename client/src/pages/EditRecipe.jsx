@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link, useLocation } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
-const CreateRecipe = () => {
-  const [ingredients, setIngredients] = useState([
-    { amount: "", unit: "", ingredient: "" },
-  ]);
+
+const EditRecipe = () => {
+  let { state } = useLocation();
+  let recipe = state.recipe
   const navigateTo = useNavigate();
+  const [ingredients, setIngredients] = useState(recipe.ingredients);
 
   // const defaultValues = {
   //   title: "",
@@ -21,25 +23,41 @@ const CreateRecipe = () => {
     reset,
     setValue,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      title: recipe.title,
+      directions: recipe.directions,
+    },
+  });
+
+  useEffect(() => {
+    // Populate the ingredients data in the form
+    recipe.ingredients.forEach((ingredient, index) => {
+      setValue(`ingredients[${index}].amount`, ingredient.amount);
+      setValue(`ingredients[${index}].unit`, ingredient.unit);
+      setValue(`ingredients[${index}].ingredient`, ingredient.ingredient);
+    });
+  }, [recipe.ingredients, setValue]);
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
-    const newRecipe = {
+    const updatedRecipe = {
+      _id: recipe._id,
       title: data.title,
       ingredients: ingredients,
       directions: data.directions,
     };
 
-    console.log(newRecipe);
-
+    console.log(updatedRecipe);
+    
     axios
-      .post("http://localhost:3000/recipe_app/add_recipe", newRecipe)
+      .put(`http://localhost:3000/recipe_app/update_recipe/${recipe._id}`, updatedRecipe)
       .then((res) => {
         console.log(res);
         reset();
         setIngredients([{ amount: "", unit: "", ingredient: "" }]);
-        navigateTo('/')
+        recipe = updatedRecipe;
+        navigateTo(`/recipe/${recipe._id}`, {state: {recipe}})
       })
       .catch((error) => {
         console.log(`Error: ${error}`);
@@ -80,7 +98,7 @@ const CreateRecipe = () => {
 
   return (
     <section>
-      <h1>Add a recipe</h1>
+      <h1>Edit {recipe.title}</h1>
       <form
         className='createRecipeForm'
         onSubmit={(e) => handleSubmit(onSubmit)(e)}
@@ -90,6 +108,7 @@ const CreateRecipe = () => {
           <input
             name='title'
             type='text'
+            defaultValue={recipe.title}
             {...register("title", { required: "A recipe title is required" })}
           />
           <small className='text-danger'>
@@ -98,7 +117,9 @@ const CreateRecipe = () => {
         </div>
         <label>Ingredients: </label>
         {ingredients.map((ingredient, index) => (
+          
           <span key={index}>
+            {console.log(ingredient)}
             <input
               type='text'
               value={ingredient.amount}
@@ -162,15 +183,23 @@ const CreateRecipe = () => {
             className='directions'
             name='directions'
             type='text'
+            defaultValue={recipe.directions}
             {...register("directions")}
           />
         </div>
-        <button className='btn' type='submit'>
-          Submit
-        </button>
+        <div className="btnContainer">
+          <button className='btn' type='submit'>
+            Update
+          </button>
+          <Link to={`/recipe/${recipe._id}`} state={{recipe}}>
+            <button className='btn' type='button'>
+              Back
+            </button>
+          </Link>
+        </div>
       </form>
     </section>
   );
 };
 
-export default CreateRecipe;
+export default EditRecipe;

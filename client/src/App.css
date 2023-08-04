@@ -3,6 +3,31 @@
   margin: 0 auto;
 }
 
+.navbar {
+  display: flex;
+  gap:1rem;
+  margin: .5rem auto;
+  width:90vw
+}
+
+section {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+.link {
+  color: darkcyan;
+}
+
+.active {
+  color: brown;
+}
+
 label {
   display: block;
 }
@@ -15,6 +40,19 @@ input {
   background-color: darkgray;
   color: aqua;
   width: 10rem;
+}
+
+.editBtn {
+    color: red;
+  margin-left: .7rem;
+  margin-bottom: 1.7rem;
+  padding: 1px;
+  width: 4rem;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: space-between;
 }
 
 .deleteBtn {
@@ -52,7 +90,27 @@ small {
   width: 22rem;
 }
 
-.deleteRecipeTitle:nth-child(odd) {
+.recipesLink {
+  color: black; 
+}
+
+
+
+.recipesLink:hover {
+  color: darkcyan;
+  
+}
+
+
+.RecipesList {
+  box-shadow: 1px 1px 3px black;
+} 
+
+.RecipesList:hover {
+  box-shadow: inset 1px 1px 3px black;
+}
+
+.RecipeTitle:nth-child(odd) {
   background-color: #cac1c1;
   border-radius: 8px;
   display: flex;
@@ -61,11 +119,16 @@ small {
   width: 100%;
 }
 
-.deleteRecipeTitle:nth-child(even) {
+.RecipeTitle:nth-child(even) {
   background-color: #e6e6e6;
   border-radius: 8px;
   display: flex;
   justify-content: space-between;
   padding: 8px;
   width: 100%;
+}
+
+.individualRecipeTittle {
+  display: flex;
+  align-items: center;
 }

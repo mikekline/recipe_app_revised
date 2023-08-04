@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
+
 
 const Recipes = () => {
   const [allRecipes, setAllRecipes] = useState([]);
@@ -28,30 +30,24 @@ const Recipes = () => {
 
   return (
     <section>
-      <h2>Recipes</h2>
+      <h1>Recipes</h1>
+      <div>
       {allRecipes &&
         allRecipes.map((recipe) => {
           return (
-            <div key={recipe._id}>
-              <h3>{recipe.title}</h3>
-              <p>
-                {recipe.ingredients &&
-                  recipe.ingredients.map((ingredient) => {
-                    return (
-                      <p key={ingredient._id}>
-                        {ingredient.amount}
-                        {ingredient.unit}
-                        {ingredient.amount && " - "}
-                        {ingredient.ingredient}
-                      </p>
-                    );
-                  })}
-              </p>
-              {recipe.directions && <h4>Directions</h4>}
-              <p>{recipe.directions && recipe.directions}</p>
-            </div>
-          );
+              <div key={recipe._id} className="list">
+                <Link
+                  to={`/recipe/${recipe._id}`}
+                  state={{recipe}}
+                  className="recipesLink"
+                  
+                >
+                  <p  className='RecipeTitle  RecipesList'>{recipe.title}</p>   
+                </Link>  
+              </div>     
+          );   
         })}
+      </div>
     </section>
   );
 };
