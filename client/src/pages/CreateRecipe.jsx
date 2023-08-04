@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import Navbar from './Navbar';
 
 const CreateRecipe = () => {
   const [ingredients, setIngredients] = useState([
@@ -77,7 +78,7 @@ const CreateRecipe = () => {
 
   return (
     <section>
-      <h2>Add a recipe</h2>
+      <h1>Add a recipe</h1>
       <form
         className='createRecipeForm'
         onSubmit={(e) => handleSubmit(onSubmit)(e)}

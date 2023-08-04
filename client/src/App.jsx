@@ -1,13 +1,22 @@
 import "./App.css";
-import { CreateRecipe, DeleteRecipes, Recipes } from "./pages";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Navbar, CreateRecipe, DeleteRecipes, Recipes, Recipe, Error } from "./pages";
+
 
 function App() {
   return (
-    <>
-      <CreateRecipe />
-      <Recipes />
-      <DeleteRecipes />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Navbar />}>
+          <Route index element={<Recipes />} /> 
+          <Route path='recipe/:recipeId' element={<Recipe />} />
+          <Route path='addRecipe' element={<CreateRecipe />} />
+          <Route path='deleteRecipe' element={<DeleteRecipes />} />
+        </Route>
+        
+        <Route path='*' element={<Error />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
