@@ -34,12 +34,12 @@ const CreateRecipe = () => {
     console.log(newRecipe);
 
     axios
-      .post("http://localhost:3000/recipe_app/add_recipe", newRecipe)
+      .post(`${process.env.REACT_APP_BASE_URL}/recipes/add_recipe`, newRecipe)
       .then((res) => {
         console.log(res);
         reset();
         setIngredients([{ amount: "", unit: "", ingredient: "" }]);
-        navigateTo('/')
+        navigateTo('/Recipe_app/')
       })
       .catch((error) => {
         console.log(`Error: ${error}`);

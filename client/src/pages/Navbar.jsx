@@ -5,19 +5,19 @@ const Navbar = () => {
     <>  
       <nav className='navbar'>
         <NavLink 
-          to='/' 
+          to='/Recipe_app/' 
           className={({isActive})=>isActive?'link active': 'link'} 
         >
           Recipes
         </NavLink>
         <NavLink 
-          to='/addRecipe' 
+          to='/Recipe_app/addRecipe' 
           className={({isActive})=>isActive?'link active': 'link'}
         >
           Add a Recipe
         </NavLink>
         <NavLink 
-          to='/deleteRecipe' 
+          to='/Recipe_app/deleteRecipe' 
           className={({isActive})=>isActive?'link active': 'link'}
         >
           Delete Recipes

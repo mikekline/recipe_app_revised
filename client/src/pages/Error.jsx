@@ -5,7 +5,7 @@ const Error = () => {
     <section>
         <h1>404</h1>
         <p>page not found</p>
-        <Link to='/'>Back home</Link>
+        <Link to='/Recipe_app/'>Back home</Link>
     </section>
   )
 }

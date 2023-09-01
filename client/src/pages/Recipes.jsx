@@ -10,7 +10,7 @@ const Recipes = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/recipe_app/recipes")
+      .get(`${process.env.REACT_APP_BASE_URL}/recipes/recipes`)
       .then((res) => {
         setAllRecipes(res.data);
         setLoading(false);
@@ -37,7 +37,7 @@ const Recipes = () => {
           return (
               <div key={recipe._id} className="list">
                 <Link
-                  to={`/recipe/${recipe._id}`}
+                  to={`/Recipe_app/recipe/${recipe._id}`}
                   state={{recipe}}
                   className="recipesLink"
                   

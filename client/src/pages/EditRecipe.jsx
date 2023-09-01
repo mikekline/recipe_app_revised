@@ -48,16 +48,15 @@ const EditRecipe = () => {
       directions: data.directions,
     };
 
-    console.log(updatedRecipe);
     
     axios
-      .put(`http://localhost:3000/recipe_app/update_recipe/${recipe._id}`, updatedRecipe)
+      .put(`${process.env.REACT_APP_BASE_URL}/recipes/update_recipe/${recipe._id}`, updatedRecipe)
       .then((res) => {
         console.log(res);
         reset();
         setIngredients([{ amount: "", unit: "", ingredient: "" }]);
         recipe = updatedRecipe;
-        navigateTo(`/recipe/${recipe._id}`, {state: {recipe}})
+        navigateTo(`/Recipe_app/recipe/${recipe._id}`, {state: {recipe}})
       })
       .catch((error) => {
         console.log(`Error: ${error}`);
@@ -191,7 +190,7 @@ const EditRecipe = () => {
           <button className='btn' type='submit'>
             Update
           </button>
-          <Link to={`/recipe/${recipe._id}`} state={{recipe}}>
+          <Link to={`/Recipe_app/recipe/${recipe._id}`} state={{recipe}}>
             <button className='btn' type='button'>
               Back
             </button>

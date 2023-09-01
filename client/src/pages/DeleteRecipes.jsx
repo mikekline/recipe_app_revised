@@ -8,7 +8,7 @@ const DeleteRecipes = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/recipe_app/recipes")
+      .get(`${process.env.REACT_APP_BASE_URL}/recipes/recipes`)
       .then((res) => {
         setAllRecipes(res.data);
         setLoading(false);
@@ -28,7 +28,7 @@ const DeleteRecipes = () => {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:3000/recipe_app/delete_recipe/${id}`)
+      .delete(`${process.env.REACT_APP_BASE_URL}/recipes/delete_recipe/${id}`)
       .then((res) => {
         console.log(res);
         setAllRecipes(allRecipes.filter((recipe) => recipe._id !== id));
