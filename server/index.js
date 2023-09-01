@@ -6,13 +6,22 @@ const accountRouter = require("./routes/account_router");
 const recipeRouter = require("./routes/recipe_router");
 const Port = process.env.PORT || 4023;
 require("dotenv").config();
+const cookieParser = require("cookie-parser");
 
-app.use(cors());
 app.use(
-  express.urlencoded({
-    extended: true,
+  cors({
+    origin: ["http://localhost:4023"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,    
   })
 );
+//remove urlencoded?
+// app.use(
+//   express.urlencoded({
+//     extended: true,
+//   })
+// );
+app.use(cookieParser());
 app.use(express.json());
 
 // app.use(function (req, res, next) {
