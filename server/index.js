@@ -10,7 +10,7 @@ const cookieParser = require("cookie-parser");
 
 app.use(
   cors({
-    origin: ["http://localhost:4023"],
+    origin: ["http://localhost:3000"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,    
   })
@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 // app.use(function (req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "http://localhost:5173"); // update to match the domain you will make the request from
+//   res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
 //   res.header(
 //     "Access-Control-Allow-Headers",
 //     "Origin, X-Requested-With, Content-Type, Accept"
