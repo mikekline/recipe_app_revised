@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Navbar, CreateRecipe, EditRecipe, DeleteRecipes, Recipes, Recipe, Error } from "./pages";
-import { Login, Signup } from "./pages/auth";
+import { Login, SignUp } from "./pages/auth";
 
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
           <Route path='/Recipe_app/deleteRecipe' element={<DeleteRecipes />} />
         </Route>
         <Route path='/Recipe_app/login' element={<Login />} />
-        <Route path='/Recipe_app/signup' element={<Signup />} />
+        <Route path='/Recipe_app/signup' element={<SignUp />} />
         
         <Route path='*' element={<Error />} />
       </Routes>

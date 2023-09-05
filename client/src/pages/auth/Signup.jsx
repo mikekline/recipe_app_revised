@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
-const Signup = () => {
+const SignUp = () => {
   const navigateTo = useNavigate();
 
   const {
@@ -22,9 +22,10 @@ const Signup = () => {
       username: data.username,
       password: data.password,
     };
-console.log(newUser)
+
     axios
-      .post(`${process.env.REACT_APP_BASE_URL}/user/register`, newUser,
+      .post(`${process.env.REACT_APP_BASE_URL}/user/register`,
+        newUser,
         { withCredentials: true }
       )
       .then((res) => {
@@ -99,4 +100,4 @@ console.log(newUser)
   );
 }
 
-export default Signup
+export default SignUp
