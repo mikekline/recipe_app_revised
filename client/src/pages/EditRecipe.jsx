@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { Link, useLocation } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useCookieContext } from './auth/Auth';
 
 
 const EditRecipe = () => {
   let { state } = useLocation();
   let recipe = state.recipe
+  const {  user } = useCookieContext();
   const navigateTo = useNavigate();
   const [ingredients, setIngredients] = useState(recipe.ingredients);
 

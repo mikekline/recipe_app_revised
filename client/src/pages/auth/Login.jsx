@@ -30,9 +30,14 @@ const Login = () => {
       .then((res) => {
         console.log(res);
         const { success, message } = res.data;
+        const test =res
+        console.log(test)
         if(success){
           reset();
-          navigateTo('/Recipe_app/');
+          setTimeout(() =>{
+            navigateTo('/Recipe_app');
+          }, 1000);
+          
         } else {
           alert(message);
         };
@@ -86,4 +91,4 @@ const Login = () => {
   );
 }
 
-export default Login
+export default Login;

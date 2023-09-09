@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
+import { useCookieContext } from './auth/Auth';
 
 const DeleteRecipes = () => {
   const [allRecipes, setAllRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const {  user } = useCookieContext();
 
   useEffect(() => {
     axios

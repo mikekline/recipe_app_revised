@@ -1,9 +1,19 @@
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { useCookieContext } from './auth/Auth';
 
 const Navbar = () => {
+  const navigateTo = useNavigate();
+  const {  user, Logout } = useCookieContext()
+
+  // const Logout = () => {
+  //   removeCookie("token");
+  //   navigateTo("/Recipe_app/login");
+  // };
+
   return (
     <>  
       <nav className='navbar'>
+        <div className='linkContainer'>
         <NavLink 
           to='/Recipe_app/' 
           className={({isActive})=>isActive?'link active': 'link'} 
@@ -22,6 +32,10 @@ const Navbar = () => {
         >
           Delete Recipes
         </NavLink>
+        
+        </div>
+        <div className='welcome'>  {`Welcome Chef: ${user.username}`}<button className='logOutBtn' onClick={ Logout }>Logout</button></div>
+        
       </nav>
       <Outlet />
     </>

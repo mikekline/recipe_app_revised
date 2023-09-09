@@ -20,7 +20,7 @@ newAccount = async (req, res, next) => {
     });
     res
       .status(201)
-      .json({ message: "You are now signed in!", success: true, user });
+      .json({ message: "You are now signed up!", success: true, user });
     next();
   } catch (err) {
     return res.status(500).json({ message: err.message });
@@ -46,6 +46,7 @@ login = async (req, res, next) => {
       return res.json({ message:'Incorrect password!' }) 
     }
      const token = createSecretToken(user._id);
+     console.log(token)
      res.cookie("token", token, {
        withCredentials: true,
        httpOnly: false,

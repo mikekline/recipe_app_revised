@@ -2,11 +2,13 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useCookieContext } from './auth/Auth';
 
 const CreateRecipe = () => {
   const [ingredients, setIngredients] = useState([
     { amount: "", unit: "", ingredient: "" },
   ]);
+  const {  user } = useCookieContext();
   const navigateTo = useNavigate();
 
   // const defaultValues = {
