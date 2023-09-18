@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Link, useLocation } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useCookieContext } from './auth/Auth';
+import { useCookieContext } from '../auth/Auth';
 
 
 const EditRecipe = () => {
@@ -51,7 +51,7 @@ const EditRecipe = () => {
     };
 
     
-    axios
+    await axios
       .put(`${process.env.REACT_APP_BASE_URL}/recipes/update_recipe/${recipe._id}`, updatedRecipe)
       .then((res) => {
         console.log(res);

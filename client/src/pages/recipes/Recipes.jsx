@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
-import { useCookieContext } from './auth/Auth';
+import { useCookieContext } from '../auth/Auth';
 
 
 const Recipes = () => {
   const [allRecipes, setAllRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const {  user } = useCookieContext();
+  const { user } = useCookieContext();
 
   useEffect(() => {
     axios

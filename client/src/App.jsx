@@ -1,23 +1,29 @@
 import { useEffect } from "react";
 import "./App.css";
 import { Routes, Route } from 'react-router-dom';
-import { Navbar, CreateRecipe, EditRecipe, DeleteRecipes, Recipes, Recipe, Error } from "./pages";
+import { CreateRecipe, EditRecipe, DeleteRecipes, Recipes, Recipe } from "./pages/recipes";
+import { Navbar,Error } from "./pages";
 import { Login, SignUp } from "./pages/auth";
 import  Auth from './pages/auth/Auth'
 import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
  
 
-
-
 function App() {
+  const [cookies, getCookies, setCookie] = useCookies(['token']);
+  const navigateTo = useNavigate();
+  
+  useEffect(() =>{
+    if (!cookies.token) {
+      navigateTo("/Recipe_app/login");
+      return;
+    }
 
-    const [cookies, getCookies,  setCookie] = useCookies(['']);
-useEffect(() =>{
     function handleLogin(token) {
-setCookie('token', token, {path:'/Recipe_app'})
+      setCookie('token', token, {path:'/Recipe_app'})
     }
     handleLogin()
-}, [])
+  }, [])
 
   return (
       <Routes>

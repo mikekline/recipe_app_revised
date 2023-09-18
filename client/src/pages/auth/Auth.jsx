@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 
+//!todo change axios to try
+//!todo BUG: still removes cookie on page reload as well as log out, should be log out only, but  cookie still exists
 
 const CookieContext = createContext();
 
@@ -10,57 +12,59 @@ export const useCookieContext = () => useContext(CookieContext);
 
 const Auth = ({children}) => {
   const navigateTo = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies(['token']);
+  const [cookies, getCookies, removeCookie] = useCookies(['token']);
   const [user, setUser] = useState("");
  
 
 
-
-
-
-
-
-
   useEffect(() => {
-        
-// setCookie('token', cookies, {path:'/Recipe_app'})
     
     const verifyCookie = async () => {
       console.log(cookies.token)
-      if (!cookies.token) {
+      if (!JSON.stringify(cookies) === '{}') {
         navigateTo("/Recipe_app/login");
+        return;
       }
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/user`,
-        {},
-        { withCredentials: true }
-      );
-      const { status, username, email } = data;
-      console.log(data)
-      setUser({username, email});
 
-      return status
-        ? console.log(`Hello ${username}`)
-        : (removeCookie("token"), navigateTo("/Recipe_app/login"));
+
+      await axios
+      .post(`${process.env.REACT_APP_BASE_URL}/user`,
+        {},
+        { withCredentials: true })
+      .then((res) => {
+        const { status, username, email } = res.data;
+        console.log(res.data)
+        setUser({username, email});
+
+        return status
+          ? console.log('logged in')
+          : (removeCookie('token', {path:'/Recipe_app'}), navigateTo("/Recipe_app/login"));
+      })
+      .catch((error) => {
+        console.log(`Error: ${error}`);
+      });
     };
+
     verifyCookie();
-  }, [cookies, navigateTo, removeCookie, setCookie]);
+  }, [cookies, navigateTo, removeCookie]);
+
+
   const Logout = () => {
-    removeCookie('mycookies');
+    //!todo still not removing token, in some way
+    //!todo set user to null
+    //scratch that it works if  path is correct
+    const {username, email} = '';
+    removeCookie('token', {path:'/Recipe_app'});
+    setUser({username, email});
     navigateTo("/Recipe_app/login");
     console.log(cookies.token)
   };
-  return (
-    
-    
-      <CookieContext.Provider value={{ user, Logout }}>
-  {children}
-  
 
-      
-    </CookieContext.Provider>
-      
-    
+
+  return (
+    <CookieContext.Provider value={{ user, setUser, Logout }}>
+        {children}
+    </CookieContext.Provider>    
   );
 }
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
-import { useCookieContext } from './auth/Auth';
+import { useCookieContext } from '../auth/Auth';
 
 const DeleteRecipes = () => {
   const [allRecipes, setAllRecipes] = useState([]);
@@ -28,8 +28,8 @@ const DeleteRecipes = () => {
     );
   }
 
-  const handleDelete = (id) => {
-    axios
+  const handleDelete = async (id) => {
+    await axios
       .delete(`${process.env.REACT_APP_BASE_URL}/recipes/delete_recipe/${id}`)
       .then((res) => {
         console.log(res);

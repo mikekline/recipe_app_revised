@@ -23,7 +23,7 @@ const SignUp = () => {
       password: data.password,
     };
 
-    axios
+    await axios
       .post(`${process.env.REACT_APP_BASE_URL}/user/register`,
         newUser,
         { withCredentials: true }

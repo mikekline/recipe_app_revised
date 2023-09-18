@@ -22,16 +22,13 @@ const Login = () => {
       password: data.password,
     };
 
-    axios
+    await axios
       .post(`${process.env.REACT_APP_BASE_URL}/user/login`,
         login,
         { withCredentials: true }
       )
       .then((res) => {
-        console.log(res);
         const { success, message } = res.data;
-        const test =res
-        console.log(test)
         if(success){
           reset();
           setTimeout(() =>{
