@@ -10,7 +10,7 @@ const Recipes = () => {
   const [loading, setLoading] = useState(true);
   const { user } = useCookieContext();
 
-console.log(user.email)
+
   useEffect(() => {
     if (user?.email) {
       axios

@@ -42,6 +42,9 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 //end point for login/register
 app.use("/user", accountRouter);
 
+//end point for auth verification, possible delete for deploment
+app.use("/Recipe_app/user", accountRouter);
+
 //end point for recipes
 app.use("/recipes", recipeRouter);
 

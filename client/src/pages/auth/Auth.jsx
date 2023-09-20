@@ -18,25 +18,26 @@ const Auth = ({ children }) => {
         navigateTo("/Recipe_app/login");
         return;
       }
-
+      
+      if (cookies.token){
       await axios
-        .post(`${process.env.REACT_APP_BASE_URL}/user`, {}, { withCredentials: true })
+        .post(`${process.env.REACT_APP_BASE_URL}/Recipe_app/user`, {}, { withCredentials: true })
         .then((res) => {
           const { status, username, email } = res.data;
           setUser({ username, email });
           if (!status) {
-            removeCookie('token', { path: '/' });
+            removeCookie('token', { path: '/Recipe_app' });
             navigateTo("/Recipe_app/login");
           }
         })
         .catch((error) => {
           console.log(`Error: ${error}`);
         })
-   
+      }
     };
 
     verifyCookie();
-  }, [cookies, navigateTo, removeCookie]);
+  }, []);
 
 
 

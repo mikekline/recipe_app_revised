@@ -16,7 +16,7 @@ const Navbar = () => {
   const Logout = () => {
     const {username, email} = '';
     setUser({username, email});
-    removeCookie('token', {path:'/'});
+    removeCookie('token', {path:'/Recipe_app'});
     navigateTo("/Recipe_app/login");
   };
   

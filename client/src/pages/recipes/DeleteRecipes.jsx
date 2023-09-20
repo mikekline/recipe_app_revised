@@ -7,9 +7,9 @@ const DeleteRecipes = () => {
   const [allRecipes, setAllRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const { user } = useCookieContext();
-console.log(user)
+
   useEffect(() => {
-    console.log(user.email)
+
    if (user?.email) {
       axios
         .get(`${process.env.REACT_APP_BASE_URL}/recipes/recipes`, {params: {user: user.email}})

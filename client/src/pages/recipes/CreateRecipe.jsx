@@ -11,7 +11,6 @@ const CreateRecipe = () => {
   const { user } = useCookieContext();
   const navigateTo = useNavigate();
 
- console.log(user)
 
   const {
     register,
@@ -35,7 +34,7 @@ const CreateRecipe = () => {
     await axios
       .post(`${process.env.REACT_APP_BASE_URL}/recipes/add_recipe`, newRecipe)
       .then((res) => {
-        console.log(res);
+        console.log(res.data.message);
         reset();
         setIngredients([{ amount: "", unit: "", ingredient: "" }]);
         navigateTo('/Recipe_app/')
