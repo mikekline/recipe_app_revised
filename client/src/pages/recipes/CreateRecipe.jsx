@@ -11,11 +11,7 @@ const CreateRecipe = () => {
   const { user } = useCookieContext();
   const navigateTo = useNavigate();
 
-  // const defaultValues = {
-  //   title: "",
-  //   ingredients: ingredients,
-  //   directions: "",
-  // };
+ console.log(user)
 
   const {
     register,
@@ -31,6 +27,7 @@ const CreateRecipe = () => {
       title: data.title,
       ingredients: ingredients,
       directions: data.directions,
+      user:user.email,
     };
 
     console.log(newRecipe);

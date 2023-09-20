@@ -10,17 +10,22 @@ const Recipes = () => {
   const [loading, setLoading] = useState(true);
   const { user } = useCookieContext();
 
+console.log(user.email)
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_BASE_URL}/recipes/recipes`)
-      .then((res) => {
-        setAllRecipes(res.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(`Error: ${error}`);
-      });
-  }, []);
+    if (user?.email) {
+      axios
+        .get(`${process.env.REACT_APP_BASE_URL}/recipes/recipes`, {params: {user: user.email}})
+        .then((res) => {
+          const {recipes, message} = res.data
+          setAllRecipes(recipes);
+          console.log(message)
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(`Error: ${error}`);
+        });
+    }
+  }, [user.email]);
 
   if (loading) {
     return (

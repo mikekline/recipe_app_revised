@@ -2,8 +2,10 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useCookies } from 'react-cookie';
 
 const Login = () => {
+  const [cookies, setCookie] = useCookies(['token']);
   const navigateTo = useNavigate();
 
   const {
@@ -28,8 +30,9 @@ const Login = () => {
         { withCredentials: true }
       )
       .then((res) => {
-        const { success, message } = res.data;
-        if(success){
+        const { success, message, token } = res.data;
+        if(success && token){
+          console.log(message);
           reset();
           setTimeout(() =>{
             navigateTo('/Recipe_app');

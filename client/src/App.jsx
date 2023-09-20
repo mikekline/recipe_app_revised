@@ -5,33 +5,16 @@ import { CreateRecipe, EditRecipe, DeleteRecipes, Recipes, Recipe } from "./page
 import { Navbar,Error } from "./pages";
 import { Login, SignUp } from "./pages/auth";
 import  Auth from './pages/auth/Auth'
-import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
- 
+
 
 function App() {
-  const [cookies, getCookies, setCookie] = useCookies(['token']);
-  const navigateTo = useNavigate();
-  
-  useEffect(() =>{
-    if (!cookies.token) {
-      navigateTo("/Recipe_app/login");
-      return;
-    }
-
-    function handleLogin(token) {
-      setCookie('token', token, {path:'/Recipe_app'})
-    }
-    handleLogin()
-  }, [])
-
   return (
       <Routes>
         <Route path='/Recipe_app' element={<Auth > <Navbar/> </Auth>} >
-          <Route index element={<Recipes />} /> 
+          <Route index element={<Auth ><Recipes /></Auth>} /> 
           <Route path='/Recipe_app/recipe/:recipeId' element={<Recipe />} />
           <Route path='/Recipe_app/editRecipe/:recipeId' element={<EditRecipe />} />
-          <Route path='/Recipe_app/addRecipe' element={<CreateRecipe />} />
+          <Route path='/Recipe_app/addRecipe' element={<Auth><CreateRecipe /></Auth>} />
           <Route path='/Recipe_app/deleteRecipe' element={<DeleteRecipes />} />
         </Route>
         

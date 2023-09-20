@@ -1,25 +1,25 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useCookies } from "react-cookie";
 import { useCookieContext } from './auth/Auth';
-//! navbar still loading once user is  logged out
+
 const Navbar = () => {
-  const { user, setUser, Logout } = useCookieContext()
+  const { user, setUser } = useCookieContext()
   const [cookies, getCookies, removeCookie] = useCookies(['token']);
-const navigateTo = useNavigate();
-  if (JSON.stringify(cookies) === '{}'){
+  const navigateTo = useNavigate();
+
+
+  if (!cookies.token){
     return (<></>);
   }
 
-    const Logout2 = () => {
-    //!todo still not removing token, in some way
-    //!todo set user to null
-    //scratch that it works if  path is correct
+
+  const Logout = () => {
     const {username, email} = '';
-    removeCookie('token', {path:'/Recipe_app'});
     setUser({username, email});
+    removeCookie('token', {path:'/'});
     navigateTo("/Recipe_app/login");
-    console.log(cookies.token)
   };
+  
 
   return (
     <>  
@@ -45,7 +45,7 @@ const navigateTo = useNavigate();
         </NavLink>
         
         </div>
-        <div className='welcome'>  {`Welcome Chef: ${user.username}`}<button className='logOutBtn' onClick={ Logout2 }>Logout</button></div>
+        <div className='welcome'>  {`Welcome Chef: ${user.username}`}<button className='logOutBtn' onClick={ Logout }>Logout</button></div>
         
       </nav>
       <Outlet />
