@@ -36,7 +36,7 @@ const DeleteRecipes = () => {
     await axios
       .delete(`${process.env.REACT_APP_BASE_URL}/recipes/delete_recipe/${id}`)
       .then((res) => {
-        console.log(res);
+        console.log(res.data.message);
         setAllRecipes(allRecipes.filter((recipe) => recipe._id !== id));
       });
   };
