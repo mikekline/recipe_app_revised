@@ -25,6 +25,7 @@ const Auth = ({ children }) => {
         .then((res) => {
           const { status, username, email } = res.data;
           setUser({ username, email });
+      
           if (!status) {
             removeCookie('token', { path: '/Recipe_app' });
             navigateTo("/Recipe_app/login");

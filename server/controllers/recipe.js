@@ -67,11 +67,10 @@ updateRecipe = async (req, res) => {
 };
 
 deleteRecipe = async (req, res) => {
-  //!todo figure out personalized delete request
   try {
-    const user = req;
-    console.log(user)
-    await Recipe.findByIdAndDelete({user: user});
+    const id = req.params.id;
+    
+    await Recipe.findByIdAndDelete(id);
     res.status(200).json({ message: "Recipe deleted!" });
   } catch (err) {
     res.status(500).json({ message: err.message });

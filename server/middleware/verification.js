@@ -12,8 +12,14 @@ userVerification = (req, res) => {
     if (err) {
      return res.json({ status: false })
     } else {
-      const user = await User.findById(data.id)
-      if (user) return res.json({ status: true, username: user.username, email: user.email })
+      const {_id, username, email} = await User.findById(data.id)
+      if (email) return res.json(
+        { 
+          status: true, 
+          id: _id, 
+          username: username, 
+          email: email, 
+        })
       else return res.json({ status: false })
     }
   })

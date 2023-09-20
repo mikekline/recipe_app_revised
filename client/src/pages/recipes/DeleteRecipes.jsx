@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 import { useCookieContext } from '../auth/Auth';
-//!todo figure out personalized delete request
+
 const DeleteRecipes = () => {
   const [allRecipes, setAllRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const { user } = useCookieContext();
 
   useEffect(() => {
-
    if (user?.email) {
       axios
         .get(`${process.env.REACT_APP_BASE_URL}/recipes/recipes`, {params: {user: user.email}})
