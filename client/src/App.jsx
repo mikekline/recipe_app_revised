@@ -1,23 +1,29 @@
+import { useEffect } from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Navbar, CreateRecipe, EditRecipe, DeleteRecipes, Recipes, Recipe, Error } from "./pages";
+import { Routes, Route } from 'react-router-dom';
+import { CreateRecipe, EditRecipe, DeleteRecipes, Recipes, Recipe } from "./pages/recipes";
+import { Navbar,Error } from "./pages";
+import { Login, SignUp } from "./pages/auth";
+import  Auth from './pages/auth/Auth'
 
 
 function App() {
   return (
-    <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Navbar />}>
+        <Route path='/Recipe_app' element={<Auth > <Navbar/> </Auth>} >
           <Route index element={<Recipes />} /> 
-          <Route path='recipe/:recipeId' element={<Recipe />} />
-          <Route path='editRecipe/:recipeId' element={<EditRecipe />} />
-          <Route path='addRecipe' element={<CreateRecipe />} />
-          <Route path='deleteRecipe' element={<DeleteRecipes />} />
+          <Route path='/Recipe_app/recipe/:recipeId' element={<Recipe />} />
+          <Route path='/Recipe_app/editRecipe/:recipeId' element={<EditRecipe />} />
+          <Route path='/Recipe_app/addRecipe' element={<CreateRecipe />} />
+          <Route path='/Recipe_app/deleteRecipe' element={<DeleteRecipes />} />
         </Route>
         
+        <Route path='/Recipe_app/login' element={<Login />} />
+        <Route path='/Recipe_app/signup' element={<SignUp />} />
+        
         <Route path='*' element={<Error />} />
+        
       </Routes>
-    </BrowserRouter>
   );
 }
 

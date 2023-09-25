@@ -2,18 +2,15 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useCookieContext } from '../auth/Auth';
 
 const CreateRecipe = () => {
   const [ingredients, setIngredients] = useState([
     { amount: "", unit: "", ingredient: "" },
   ]);
+  const { user } = useCookieContext();
   const navigateTo = useNavigate();
 
-  // const defaultValues = {
-  //   title: "",
-  //   ingredients: ingredients,
-  //   directions: "",
-  // };
 
   const {
     register,
@@ -29,17 +26,18 @@ const CreateRecipe = () => {
       title: data.title,
       ingredients: ingredients,
       directions: data.directions,
+      user:user.email,
     };
 
     console.log(newRecipe);
 
-    axios
-      .post("http://localhost:3000/recipe_app/add_recipe", newRecipe)
+    await axios
+      .post(`${process.env.REACT_APP_BASE_URL}/recipes/add_recipe`, newRecipe)
       .then((res) => {
-        console.log(res);
+        console.log(res.data.message);
         reset();
         setIngredients([{ amount: "", unit: "", ingredient: "" }]);
-        navigateTo('/')
+        navigateTo('/Recipe_app/')
       })
       .catch((error) => {
         console.log(`Error: ${error}`);

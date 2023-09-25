@@ -12,7 +12,7 @@ const Recipe = () => {
       <h1>
         {recipe.title}
       </h1>
-      <Link to={`/editRecipe/${recipe._id}`} state={{recipe}}>
+      <Link to={`/Recipe_app/editRecipe/${recipe._id}`} state={{recipe}}>
         <button className='btn editBtn' type='button'>
           edit
         </button>
@@ -35,7 +35,7 @@ const Recipe = () => {
       {recipe.directions && <h4>Directions</h4>}
       <p>{recipe.directions && recipe.directions}</p>
 
-      <Link to='/'>
+      <Link to='/Recipe_app/'>
         <button className='btn' type='button'>
           Back
         </button>

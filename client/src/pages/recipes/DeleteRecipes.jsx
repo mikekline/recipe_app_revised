@@ -1,22 +1,28 @@
 import React, { useState, useEffect } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
+import { useCookieContext } from '../auth/Auth';
 
 const DeleteRecipes = () => {
   const [allRecipes, setAllRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { user } = useCookieContext();
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/recipe_app/recipes")
-      .then((res) => {
-        setAllRecipes(res.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(`Error: ${error}`);
-      });
-  }, []);
+   if (user?.email) {
+      axios
+        .get(`${process.env.REACT_APP_BASE_URL}/recipes/recipes`, {params: {user: user.email}})
+        .then((res) => {
+          const {recipes, message} = res.data
+          setAllRecipes(recipes);
+          console.log(message)
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(`Error: ${error}`);
+        });
+    }
+  }, [user.email]);
 
   if (loading) {
     return (
@@ -26,11 +32,11 @@ const DeleteRecipes = () => {
     );
   }
 
-  const handleDelete = (id) => {
-    axios
-      .delete(`http://localhost:3000/recipe_app/delete_recipe/${id}`)
+  const handleDelete = async (id) => {
+    await axios
+      .delete(`${process.env.REACT_APP_BASE_URL}/recipes/delete_recipe/${id}`)
       .then((res) => {
-        console.log(res);
+        console.log(res.data.message);
         setAllRecipes(allRecipes.filter((recipe) => recipe._id !== id));
       });
   };

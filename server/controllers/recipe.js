@@ -1,8 +1,8 @@
 const Recipe = require("../models/recipes");
 
 createRecipe = async (req, res) => {
-  const { title, ingredients, directions } = req.body;
-  const recipe = new Recipe({ title, ingredients, directions });
+  const { title, ingredients, directions, user } = req.body;
+  const recipe = new Recipe({ title, ingredients, directions, user });
 
   if (!recipe) {
     return res.status(400).json({ Message: "Please add a recipe!" });
@@ -18,13 +18,14 @@ createRecipe = async (req, res) => {
 
 getRecipes = async (req, res) => {
   try {
-    const recipes = await Recipe.find({});
+    const user = req.query.user;
+    const recipes = await Recipe.find({user: user});
 
     if (!recipes.length) {
-      return res.status(404).json({ message: "No recipes to be found!" });
+      return res.status(200).json({ recipes, message: 'No recipes to be found!' });
     }
 
-    res.status(200).json(recipes);
+    res.status(200).json({recipes, message: 'Recipes found!'});
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -67,7 +68,9 @@ updateRecipe = async (req, res) => {
 
 deleteRecipe = async (req, res) => {
   try {
-    await Recipe.findByIdAndDelete(req.params.id);
+    const id = req.params.id;
+    
+    await Recipe.findByIdAndDelete(id);
     res.status(200).json({ message: "Recipe deleted!" });
   } catch (err) {
     res.status(500).json({ message: err.message });

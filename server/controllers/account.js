@@ -1,104 +1,64 @@
+const User = require("../models/account");
+const { createSecretToken } = require("../util/Token");
 const bcrypt = require('bcrypt');
-const Account = require('../models/account');
 
 
 
-createAccount = (req, res) => {
-  const body = req.body
-  const account = new Account(body)
-  
-  if (!body) {
-      return res.status(400).json({
-          success: false,
-          error: 'Please sign up'
-      })
-  }
-  
-  if (!account) {
-      return res.status(400).json({ 
-          success: false, 
-          error: error 
-      })
-  }
-
-  
-  
-
-  account
-      .save()
-      .then(() => {
-          return res.status(201).json({
-              success: true,
-              message: 'Account added! Please Login!'
-          })
-      })
-      .catch(error => {
-          return res.status(400).json({
-              error,
-              message: 'Acount not added!'
-          })
-      })
-  
+newAccount = async (req, res, next) => {
     
+  try {
+    const { email, username, password, createdAt } = req.body;
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.json({ message: "User already exists!" });
+    }
+    const user = await User.create({ email, username, password, createdAt });
+    const token = createSecretToken(user._id);
+    res.cookie("token", token, {
+      withCredentials: true,
+      httpOnly: false,
+      path: '/Recipe_app'
+    });
+    res
+      .status(201)
+      .json({ message: "You are now signed up!", success: true, user });
+    next();
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
 };
 
 
 
 
-retrieveAccount = (req, res) => {
-    let username = req.body.username;
-    let password = req.body.password;
 
-    Account
-        .findOne({username: username})
-        .then(async account => {
-            if (account) {
-                await bcrypt.compare(password, account.password, function(err, result) {
-                    if (result){
-                        req.session.account = account;
-                        console.log(req.session);
-                        return res.status(200).json({ 
-                            success: true, 
-                            message: 'Login Success' 
-                        })
-                    } else {
-                        return res.status(400).json({ 
-                            success: false, 
-                            message: 'Password did not match' 
-                        })
-                    }
-
-                });
-            } else {
-                return res.status(400).json({ 
-                    success: false, 
-                    message: 'Cound not find account' 
-                })
-            }   
-
-        }).catch(err => console.log(err))
- 
-};
-
-module.exports = {createAccount, retrieveAccount};
+login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    if(!email || !password ){
+      return res.json({message:'Email and password are required!'})
+    }
+    const user = await User.findOne({ email });
+    if(!user){
+      return res.json({ message:'Email does not exist!' }) 
+    }
+    const auth = await bcrypt.compare(password,user.password)
+    if (!auth) {
+      return res.json({ message:'Incorrect password!' }) 
+    }
+     const token = createSecretToken(user._id);
+     res.cookie("token", token, {
+       withCredentials: true,
+       httpOnly: false,
+       Domain: 'http//:localhost',
+       path: '/Recipe_app',
+     });
+     res.status(201).json({ message: "You have logged in successfully!", success: true, token });
+     next()
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+}
 
 
-
-// await Account.find({}, (err, accounts) => {
-    //       if (err) {
-    //           return res.status(400).json({ 
-    //               success: false, 
-    //               error: error 
-    //           })
-    //       }
-    //       if (!accounts.length) {
-    //           return res.status(404).json({ 
-    //               success: false, 
-    //               error: `Account not found` 
-    //           })
-    //       }
-    //       return res.status(200).json({ 
-    //           success: true, 
-    //           data: accounts 
-    //       })
-    //   }).clone().catch(err => console.log(err))
+module.exports = { newAccount, login };

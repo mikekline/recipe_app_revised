@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { Link, useLocation } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useCookieContext } from '../auth/Auth';
 
 
 const EditRecipe = () => {
   let { state } = useLocation();
   let recipe = state.recipe
+  const {  user } = useCookieContext();
   const navigateTo = useNavigate();
   const [ingredients, setIngredients] = useState(recipe.ingredients);
 
@@ -48,16 +50,15 @@ const EditRecipe = () => {
       directions: data.directions,
     };
 
-    console.log(updatedRecipe);
     
-    axios
-      .put(`http://localhost:3000/recipe_app/update_recipe/${recipe._id}`, updatedRecipe)
+    await axios
+      .put(`${process.env.REACT_APP_BASE_URL}/recipes/update_recipe/${recipe._id}`, updatedRecipe)
       .then((res) => {
         console.log(res);
         reset();
         setIngredients([{ amount: "", unit: "", ingredient: "" }]);
         recipe = updatedRecipe;
-        navigateTo(`/recipe/${recipe._id}`, {state: {recipe}})
+        navigateTo(`/Recipe_app/recipe/${recipe._id}`, {state: {recipe}})
       })
       .catch((error) => {
         console.log(`Error: ${error}`);
@@ -191,7 +192,7 @@ const EditRecipe = () => {
           <button className='btn' type='submit'>
             Update
           </button>
-          <Link to={`/recipe/${recipe._id}`} state={{recipe}}>
+          <Link to={`/Recipe_app/recipe/${recipe._id}`} state={{recipe}}>
             <button className='btn' type='button'>
               Back
             </button>

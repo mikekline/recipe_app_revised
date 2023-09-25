@@ -1,20 +1,30 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt'); 
 const Schema = mongoose.Schema;
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
+const saltRounds = 12;
  
 const accountSchema = new Schema({
-  username: { type: String, required: true, unique:true },
-  password: { type: String, required: true }
+  email: { 
+    type: String, 
+    required: [true, "An email is required!"], 
+    unique:true 
+  },
+   username: {
+    type: String,
+    required: [true, "A username is required!"],
+  },
+  password: { 
+    type: String, 
+    required: [true, "A password is required!"] 
+  },
+  createdAt: { 
+    type: Date,
+    default: new Date() 
+  }
 });
 
-accountSchema.pre('save', function(next) {
-  const account = this
-
-  bcrypt.hash(account.password, saltRounds, function(error, hash) {
-    account.password = hash
-    next()
-  });  
+accountSchema.pre("save", async function () {
+  this.password = await bcrypt.hash(this.password, saltRounds);
 });
 
 module.exports = mongoose.model('account', accountSchema);
