@@ -45,7 +45,7 @@ const Navbar = () => {
         </NavLink>
         
         </div>
-        <div className='welcome'>  {`Welcome Chef: ${user.username}`}<button className='logOutBtn' onClick={ Logout }>Logout</button></div>
+        <div className='welcome'>  {`Welcome Chef: ${user && user.username}`}<button className='logOutBtn' onClick={ Logout }>Logout</button></div>
         
       </nav>
       <Outlet />

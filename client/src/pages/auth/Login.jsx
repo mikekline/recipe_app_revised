@@ -35,7 +35,7 @@ const Login = () => {
           console.log(message);
           reset();
           setTimeout(() =>{
-            navigateTo('/Recipe_app');
+            navigateTo('/Recipe_app/');
           }, 1000);
           
         } else {
