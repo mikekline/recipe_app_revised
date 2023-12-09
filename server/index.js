@@ -10,32 +10,22 @@ const cookieParser = require("cookie-parser");
 
 app.use(
   cors({
-    origin: ["http://localhost:3000 || https://mkline.org/Recipe_app"],
+    origin: ["https://www.mkline.org"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,    
   })
 );
-//remove urlencoded?
-// app.use(
-//   express.urlencoded({
-//     extended: true,
-//   })
-// );
+
+app.use(express.urlencoded());
 app.use(cookieParser());
 app.use(express.json());
 
-// app.use(function (req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   next();
-// });
 
 //connecting to database
 const db = require("./db");
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
+
+
 
 /**************Endpoints******************/
 
@@ -54,6 +44,8 @@ app.get("/test", (req, res) => {
 });
 
 /*****************************************/
+
+
 
 //servers React files
 app.use(express.static(path.join('/var/www/html/A_Cooks_Tale/public', 'build')));

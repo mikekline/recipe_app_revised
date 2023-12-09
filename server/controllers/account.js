@@ -50,7 +50,9 @@ login = async (req, res, next) => {
      res.cookie("token", token, {
        withCredentials: true,
        httpOnly: false,
-       Domain: 'http//:localhost',
+       secure: true,
+       sameSite: 'None',
+       domain: 'mkline.org',
        path: '/Recipe_app',
      });
      res.status(201).json({ message: "You have logged in successfully!", success: true, token });
