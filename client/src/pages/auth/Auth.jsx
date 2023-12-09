@@ -27,7 +27,7 @@ const Auth = ({ children }) => {
           setUser({ username, email });
       
           if (!status) {
-            removeCookie('token', { path: '/Recipe_app' });
+            removeCookie('token', {domain: '.mkline.org', path:'/Recipe_app'});
             navigateTo("/Recipe_app/login");
           }
         })
