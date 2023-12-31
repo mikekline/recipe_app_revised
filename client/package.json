@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "start_url": ".",
-  "homepage": "https://mkline.org/Recipe_app/",
+  "homepage": "https://mkline.org/Recipe_app",
   "proxy": "http://localhost:4023",
   "dependencies": {
     "@emotion/react": "^11.10.6",
